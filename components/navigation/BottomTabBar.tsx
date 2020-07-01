@@ -1,20 +1,14 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "red",
-    paddingTop: 15,
-    paddingBottom: 15
-  }
-})
+import bottomTabStyles from '../../styles/navigation/bottomTabStyles';
 
 interface IBottomTabBarProps {
   navigate: (arg: string) => void;
 }
 export default (props: IBottomTabBarProps) => {
   return (
-    <View style={styles.container}>
+    <View style={bottomTabStyles.container}>
       <TouchableOpacity onPress={() => props.navigate('Feed')}>
         <Text>Feed</Text>
       </TouchableOpacity>
