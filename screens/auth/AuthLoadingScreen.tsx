@@ -20,6 +20,8 @@ export default (props: IauthLoadingScreenProps) => {
   const checkLogin = async () => {
     const token = await SecureStore.getItemAsync("memipedia_secure_token");
 
+    console.log('in check login in the auth loading screen')
+
     if (token) {
       // TODO: call API to ensure logged in
     } else {
