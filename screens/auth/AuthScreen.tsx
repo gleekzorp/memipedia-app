@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 
 import textInputStyles from "../../styles/forms/textInputStyles";
@@ -7,6 +7,7 @@ import authScreenStyles from "../../styles/stacks/auth/authScreenStyles";
 import API from "../../utils/api";
 import Button from "../../components/helpers/Button";
 import { formatErrors } from '../../utils/textFormatters';
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 interface IAuthScreenProps {
   navigation: {
@@ -18,6 +19,7 @@ export default (props: IAuthScreenProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext)
 
   const screenTypeText = () => {
     if (formToShow === "LOGIN") {
@@ -132,6 +134,10 @@ export default (props: IAuthScreenProps) => {
       <TouchableOpacity style={{marginTop: 10, marginBottom: 20}} onPress={handleAuthTypePress}>
         <Text style={{ color: "white" }}>{screenTypeText()}</Text>
       </TouchableOpacity>
+
+      <View>
+        <Text style={{color: 'white'}}>{JSON.stringify(currentUser)}</Text>
+      </View>
 
       {isSubmitting ? (
         <Button text={"Submitting..."} onPress={handleSubmit} disabled={true} />
