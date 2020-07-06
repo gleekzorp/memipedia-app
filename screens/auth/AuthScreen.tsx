@@ -20,7 +20,7 @@ export default (props: IAuthScreenProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { currentUser, getUser } = useContext(CurrentUserContext)
+  const { getUser } = useContext(CurrentUserContext)
 
   const screenTypeText = () => {
     if (formToShow === "LOGIN") {
@@ -58,14 +58,15 @@ export default (props: IAuthScreenProps) => {
         if (response.data.jwt) {
           await SecureStore.setItemAsync("memipedia_secure_token", response.data.jwt);
           getUser();
+          setIsSubmitting(false);
           props.navigation.navigate("Feed");
         } else {
+          setIsSubmitting(false);
           alert(
             "It looks like you typed in the wrong email or password, please try again"
           );
         }
   
-        setIsSubmitting(false);
       })
       .catch(error => {
         setIsSubmitting(false);
@@ -88,10 +89,9 @@ export default (props: IAuthScreenProps) => {
         if (response.data.memipedia_user) {
           handleLogin();
         } else {
+          setIsSubmitting(false);
           alert(`Error creating account: ${formatErrors(response.data.errors)}`);
         }
-  
-        setIsSubmitting(false);
       })
       .catch(error => {
         setIsSubmitting(false);
@@ -131,16 +131,13 @@ export default (props: IAuthScreenProps) => {
           onChangeText={val => setPassword(val)}
           style={textField}
           secureTextEntry={true}
+          onSubmitEditing={handleSubmit}
         />
       </View>
 
       <TouchableOpacity style={{marginTop: 10, marginBottom: 20}} onPress={handleAuthTypePress}>
         <Text style={{ color: "white" }}>{screenTypeText()}</Text>
       </TouchableOpacity>
-
-      <View>
-        <Text style={{color: 'white'}}>{JSON.stringify(currentUser)}</Text>
-      </View>
 
       {isSubmitting ? (
         <Button text={"Submitting..."} onPress={handleSubmit} disabled={true} />
