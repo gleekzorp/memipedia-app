@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 
 import textInputStyles from "../../styles/forms/textInputStyles";
 const { textFieldWrapper, textField } = textInputStyles;
@@ -107,7 +107,7 @@ export default (props: IAuthScreenProps) => {
   };
 
   return (
-    <View style={authScreenStyles.container}>
+    <ScrollView style={authScreenStyles.container}>
       <View style={textFieldWrapper}>
         <TextInput
           placeholder="Email"
@@ -138,6 +138,6 @@ export default (props: IAuthScreenProps) => {
       ) : (
         <Button text={buttonText()} onPress={handleSubmit} />
       )}
-    </View>
+    </ScrollView>
   );
 };
