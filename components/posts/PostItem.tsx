@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text} from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 interface IPostItemProps {
   post: {
@@ -9,9 +10,22 @@ interface IPostItemProps {
   }
 }
 export default (props: IPostItemProps) => {
-  const { name } = props.post
+  const { name, post_image_url } = props.post
+
+  // Added this if you want to ignore typescript
+  const img = () => {
+    return (
+      // @ts-ignore
+      <AutoHeightImage
+        width={Dimensions.get("window").width}
+        source={{uri: post_image_url}}
+      />
+    );
+  };
+
   return (
     <View>
+      {img()}
       <Text>{name}</Text>
     </View>
   )
