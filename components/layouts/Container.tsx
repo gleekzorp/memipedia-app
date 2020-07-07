@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import BottomTabBar from '../navigation/BottomTabBar';
+import baseStyles from '../../styles/common/baseStyles';
 
 interface IContainerProps {
   children: any;
@@ -9,7 +10,7 @@ interface IContainerProps {
 }
 export default (props : IContainerProps) => {
   return (
-    <View style={{ height: "100%"}}>
+    <View style={baseStyles.container}>
       {props.children}
       <BottomTabBar navigate={props.navigate}/>
     </View>
