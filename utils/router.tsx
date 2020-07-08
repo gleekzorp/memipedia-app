@@ -8,6 +8,7 @@ import AccountScreen from '../screens/AccountScreen';
 import PostFormScreen from '../screens/PostFormScreen';
 import AuthScreen from '../screens/auth/AuthScreen';
 import AuthLoadingScreen from '../screens/auth/AuthLoadingScreen';
+import PostDetailScreen from '../screens/PostDetailScreen';
 
 import HeaderLogo from '../components/images/HeaderLogo';
 
@@ -18,7 +19,13 @@ const AppStack = createStackNavigator(
     Feed: FeedScreen,
     Search: SearchScreen,
     Account: AccountScreen,
-    PostForm: PostFormScreen
+    PostForm: PostFormScreen,
+    PostDetail: {
+      screen: PostDetailScreen,
+      navigationOptions: {
+        headerLeft: null
+      }
+    }
   },
   {
     initialRouteName: 'Feed',
