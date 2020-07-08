@@ -50,8 +50,8 @@ export default (props : IFeedScreenProps) => {
         ) : (
           <ScrollView style={baseStyles.containerWidthBottomTabBar}>
             {posts.map(post => (
-              <TouchableOpacity onPress={() => handleItemPress(post)}>
-                <PostItem key={post.id} post={post} />
+              <TouchableOpacity key={post.id} onPress={() => handleItemPress(post)}>
+                <PostItem post={post} />
               </TouchableOpacity>
             ))}
           </ScrollView>
