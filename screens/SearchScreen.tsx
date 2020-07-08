@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -70,16 +69,21 @@ export default (props : ISearchScreenProps) => {
   )
 
   const queryRenderer = () => {
-    if (isLoading) {
-      return <ActivityIndicator />
-    } else if (emptyQuery) {
+    if (emptyQuery) {
       return (
         <View style={{paddingRight: 15, paddingHorizontal: 15}}>
           <Text style={{color: "white"}}>There were no posts matching your search</Text>
         </View>
       )
     } else if (posts && posts.length > 0) {
-      return <PostList posts={posts} navigate={props.navigation.navigate}/>
+      return (
+        <PostList
+          getPosts={handleSearch}
+          isLoading={isLoading}
+          posts={posts}
+          navigate={props.navigation.navigate}
+        />
+      )
     } else {
       return null
     }
